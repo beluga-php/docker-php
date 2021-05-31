@@ -30,7 +30,7 @@
         "php-http/httplug-bundle": "For integration with Symfony"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.17",
+        "friendsofphp/php-cs-fixer": "^2.17 || ^3.0",
         "phpunit/phpunit": "^9.5"
     },
     "conflict": {
