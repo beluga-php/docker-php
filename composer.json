@@ -41,7 +41,7 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.17",
-        "infection/infection": "^0.21.5",
+        "infection/infection": "^0.21.5 || ^0.24.0",
         "php-parallel-lint/php-parallel-lint": "^1.2",
         "phpstan/phpstan": "^0.12.58",
         "phpunit/phpunit": "^9.5",
