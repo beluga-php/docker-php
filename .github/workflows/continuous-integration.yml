@@ -34,7 +34,7 @@ jobs:
             experimental: true
 
     steps:
-    - uses: actions/checkout@v2.3.4
+    - uses: actions/checkout@v2.3.5
 
     - name: Setup PHP with PECL extension
       uses: shivammathur/setup-php@2.14.0
