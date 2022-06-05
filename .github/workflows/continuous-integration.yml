@@ -21,17 +21,9 @@ jobs:
       fail-fast: false
       matrix:
         php-version:
-          - "7.4"
-          - "8.0"
+          - "8.1"
         dependency-version: [prefer-lowest, prefer-stable]
         experimental: [false]
-        include:
-          - php-version: "8.1"
-            dependency-version: "prefer-lowest"
-            experimental: true
-          - php-version: "8.1"
-            dependency-version: "prefer-lowest"
-            experimental: true
 
     steps:
     - uses: actions/checkout@v3

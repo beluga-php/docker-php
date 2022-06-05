@@ -27,14 +27,14 @@
         }
     ],
     "require": {
-        "php": ">=7.1",
+        "php": ">=8.1",
         "beluga-php/docker-php-api": "6.1.41.0",
         "nyholm/psr7": "^1.3",
         "php-http/client-common": "^2.3",
         "php-http/socket-client": "^2.0",
         "psr/http-message": "^1.0",
-        "symfony/filesystem": "^5.2",
-        "symfony/process": "^5.2"
+        "symfony/filesystem": "^6.1",
+        "symfony/process": "^6.1"
     },
     "suggest": {
         "php-http/httplug-bundle": "For integration with Symfony"
