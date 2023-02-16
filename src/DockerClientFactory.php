@@ -8,6 +8,7 @@ use Http\Client\Common\Plugin\AddHostPlugin;
 use Http\Client\Common\Plugin\AddPathPlugin;
 use Http\Client\Common\Plugin\ContentLengthPlugin;
 use Http\Client\Common\Plugin\DecoderPlugin;
+use Http\Client\Common\Plugin\HeaderDefaultsPlugin;
 use Http\Client\Common\PluginClientFactory;
 use Http\Client\Socket\Client;
 use Http\Discovery\UriFactoryDiscovery;
@@ -35,6 +36,9 @@ final class DockerClientFactory
                 new DecoderPlugin(),
                 new AddPathPlugin($uriFactory->createUri('/v1.41')),
                 new AddHostPlugin($uriFactory->createUri($host)),
+                new HeaderDefaultsPlugin([
+                    'host' => \parse_url($host, \PHP_URL_HOST),
+                ]),
             ],
             [
                 'client_name' => 'docker-client',
