@@ -8,18 +8,18 @@ use Docker\API\Endpoint\SystemEvents as BaseEndpoint;
 use Docker\Stream\EventStream;
 use Nyholm\Psr7\Stream;
 use Symfony\Component\Serializer\SerializerInterface;
+use \Psr\Http\Message\ResponseInterface;
 
 class SystemEvents extends BaseEndpoint
 {
-    protected function transformResponseBody(string $body, int $status, SerializerInterface $serializer, ?string $contentType = null)
-    {
-        if (200 === $status) {
-            $stream = Stream::create($body);
+    protected function transformResponseBody(ResponseInterface $response, SerializerInterface $serializer, ?string $contentType = NULL)    {
+        if (200 === $response->getStatusCode()) {
+            $stream = Stream::create($response->getBody());
             $stream->rewind();
 
             return new EventStream($stream, $serializer);
         }
 
-        return parent::transformResponseBody($body, $status, $serializer, $contentType);
+        return parent::transformResponseBody($response, $serializer, $contentType);
     }
 }
