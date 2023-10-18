@@ -34,7 +34,7 @@ final class DockerClientFactory
             [
                 new ContentLengthPlugin(),
                 new DecoderPlugin(),
-                new AddPathPlugin($uriFactory->createUri('/v1.43')),
+                new AddPathPlugin($uriFactory->createUri('/v1.42')),
                 new AddHostPlugin($uriFactory->createUri($host)),
                 new HeaderDefaultsPlugin([
                     'host' => parse_url($host, \PHP_URL_HOST),
