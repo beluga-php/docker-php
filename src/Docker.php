@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Docker;
 
 use Docker\API\Client;
+use Docker\API\Endpoint\SystemInfo;
 use Docker\API\Exception\BadRequestException;
 use Docker\API\Model\AuthConfig;
 use Docker\API\Model\ExecIdStartPostBody;
-use Docker\API\Runtime\Client\Client as RuntimeClient;
 use Docker\Endpoint\ContainerAttach;
 use Docker\Endpoint\ContainerAttachWebsocket;
 use Docker\Endpoint\ContainerLogs;
@@ -94,7 +94,7 @@ class Docker extends Client
         }
 
         $client = parent::create($httpClient, $additionalPlugins, $additionalNormalizers);
-        $testClient = $client->systemInfo(RuntimeClient::FETCH_RESPONSE)->getBody()->getContents();
+        $testClient = $client->executeRawEndpoint(new SystemInfo())->getBody()->getContents();
         $jsonObj = json_decode($testClient);
 
         if ($jsonObj !== null) {
