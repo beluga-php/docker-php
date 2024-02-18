@@ -22,6 +22,8 @@ jobs:
       matrix:
         php-version:
           - "8.1"
+          - "8.2"
+          - "8.3"
         dependency-version: [prefer-lowest, prefer-stable]
         experimental: [false]
 
@@ -48,10 +50,6 @@ jobs:
         path: ${{ steps.composer-cache.outputs.dir }}
         key: ${{ runner.os }}-php-${{ matrix.php-version }}-${{ hashFiles('**/composer.lock') }}
         restore-keys: ${{ runner.os }}-php-${{ matrix.php-version }}-
-
-    - name: Install dependencies (PHP 7)
-      if: steps.composer-cache.outputs.cache-hit != 'true' && matrix.php-version < 8
-      run: composer update --${{ matrix.dependency-version }} --no-progress --no-interaction
 
     - name: Install dependencies (PHP 8)
       if: steps.composer-cache.outputs.cache-hit != 'true' && matrix.php-version >= 8
