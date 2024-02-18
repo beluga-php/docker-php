@@ -61,7 +61,8 @@ class ContainerResourceTest extends TestCase
 
     public function testAttachWebsocket(): void
     {
-        $this->markTestSkipped('Since docker API 1.28 Websockets are binary so this test needs work. See https://github.com/xtermjs/xterm.js/issues/883');
+        $this->markTestSkipped('Since docker API 1.28 Websockets are binary so this test needs work. ' .
+            'See https://github.com/xtermjs/xterm.js/issues/883');
         $containerConfig = new ContainersCreatePostBody();
         $containerConfig->setImage('busybox:latest');
         $containerConfig->setCmd(['sh']);
@@ -109,7 +110,9 @@ class ContainerResourceTest extends TestCase
 
     public function testLogs(): void
     {
-        $this->markTestSkipped('Since at least 1.43 docker API does not return a `application/vnd.docker.raw-stream` but a `application/vnd.docker.multiplexed-stream` so this needs review. See https://github.com/beluga-php/docker-php/issues/19');
+        $this->markTestSkipped('Since at least 1.43 docker API does not return a `application/vnd.docker.raw-stream` ' .
+            'but a `application/vnd.docker.multiplexed-stream` so this needs review. '.
+            'See https://github.com/beluga-php/docker-php/issues/19');
         $containerConfig = new ContainersCreatePostBody();
         $containerConfig->setImage('busybox:latest');
         $containerConfig->setCmd(['echo', '-n', 'output']);

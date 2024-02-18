@@ -69,3 +69,4 @@ jobs:
         coverageCommand: composer run-script test-coverage
         coverageLocations: |
           ${{github.workspace}}/clover.xml:clover
+      if: github.event_name != 'pull_request'
