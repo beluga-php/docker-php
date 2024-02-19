@@ -39,7 +39,7 @@ class ContextBuilder
     private $entrypoint;
 
     /**
-     * @param $fs \Symfony\Component\Filesystem\Filesystem
+     * @param \Symfony\Component\Filesystem\Filesystem $fs
      */
     public function __construct(Filesystem $fs = null)
     {
