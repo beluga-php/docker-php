@@ -91,7 +91,7 @@ class Docker extends Client
         $httpClient = null,
         array $additionalPlugins = [],
         array $additionalNormalizers = []
-    ) : self
+    ): self
     {
         if (null === $httpClient) {
             $httpClient = DockerClientFactory::createFromEnv();
