@@ -46,12 +46,13 @@
         "php-parallel-lint/php-parallel-lint": "^1.2",
         "phpstan/phpstan": "^1.10",
         "phpunit/phpunit": "^9.5",
-        "psy/psysh": "^0.11",
+        "psy/psysh": "^0.12",
         "roave/security-advisories": "dev-latest"
     },
     "conflict": {
         "docker-php/docker-php": "*",
-        "php-http/message": "<1.15"
+        "php-http/message": "<1.15",
+        "nikic/php-parser": "<4.13"
     },
     "scripts": {
         "php-cs-fixer": "vendor/bin/php-cs-fixer fix --dry-run --verbose --diff",
