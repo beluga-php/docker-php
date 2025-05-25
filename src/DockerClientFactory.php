@@ -16,7 +16,7 @@ use Http\Discovery\Psr17FactoryDiscovery;
 
 final class DockerClientFactory
 {
-    public static function create(array $config = [], PluginClientFactory $pluginClientFactory = null): PluginClient
+    public static function create(array $config = [], ?PluginClientFactory $pluginClientFactory = null): PluginClient
     {
         if (!\array_key_exists('remote_socket', $config)) {
             $config['remote_socket'] = 'unix:///var/run/docker.sock';
@@ -46,7 +46,7 @@ final class DockerClientFactory
         );
     }
 
-    public static function createFromEnv(PluginClientFactory $pluginClientFactory = null): PluginClient
+    public static function createFromEnv(?PluginClientFactory $pluginClientFactory = null): PluginClient
     {
         $options = [
             'remote_socket' => getenv('DOCKER_HOST') ? getenv('DOCKER_HOST') : 'unix:///var/run/docker.sock',

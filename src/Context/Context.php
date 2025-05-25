@@ -52,7 +52,7 @@ class Context implements ContextInterface
      * @param string     $format    Format to use when sending the call (stream or tar: string)
      * @param Filesystem $fs        filesystem object for cleaning the context directory on destruction
      */
-    public function __construct($directory, $format = self::FORMAT_STREAM, Filesystem $fs = null)
+    public function __construct($directory, $format = self::FORMAT_STREAM, ?Filesystem $fs = null)
     {
         $this->directory = $directory;
         $this->format = $format;

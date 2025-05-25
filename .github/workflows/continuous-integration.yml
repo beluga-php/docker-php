@@ -3,12 +3,12 @@ name: "Continuous Integration"
 on:
   push:
     paths-ignore:
-      - 'doc/**'
-      - '.github/**'
+      - "doc/**"
+      - ".github/**"
   pull_request:
     paths-ignore:
-      - 'doc/**'
-      - '.github/**'
+      - "doc/**"
+      - ".github/**"
 
 jobs:
   phpunit:
@@ -21,53 +21,45 @@ jobs:
       fail-fast: false
       matrix:
         php-version:
-          - '8.1'
-          - '8.2'
-          - '8.3'
+          - "8.1"
+          - "8.2"
+          - "8.3"
+          - "8.4"
         dependency-versions: [lowest, highest]
         experimental: [false]
-        include:
-          - php-version: '8.4'
-            dependency-versions: lowest
-            experimental: true
-            composer-options: --ignore-platform-reqs
-          - php-version: '8.4'
-            dependency-versions: highest
-            experimental: true
-            composer-options: --ignore-platform-reqs
 
     steps:
-    - name: Repository checkout
-      uses: actions/checkout@1d96c772d19495a3b5c517cd2bc0cb401ea0529f # v4.1.3
+      - name: Repository checkout
+        uses: actions/checkout@1d96c772d19495a3b5c517cd2bc0cb401ea0529f # v4.1.3
 
-    - name: Setup PHP with PECL extension
-      uses: shivammathur/setup-php@efffd0e4f2504f936fcfe3b69293d31ce0e2fd7a # v2.30.3
-      with:
-        php-version: ${{ matrix.php-version }}
-        tools: composer:v2
-        coverage: pcov
+      - name: Setup PHP with PECL extension
+        uses: shivammathur/setup-php@efffd0e4f2504f936fcfe3b69293d31ce0e2fd7a # v2.30.3
+        with:
+          php-version: ${{ matrix.php-version }}
+          tools: composer:v2
+          coverage: pcov
 
-    - name: Validate composer.json and composer.lock
-      run: composer validate --strict
+      - name: Validate composer.json and composer.lock
+        run: composer validate --strict
 
-    - name: Install dependencies
-      uses: ramsey/composer-install@57532f8be5bda426838819c5ee9afb8af389d51a # v3.0.0
-      with:
-        dependency-versions: ${{ matrix.dependency-versions }}
-        composer-options: ${{ matrix.composer-options }}
+      - name: Install dependencies
+        uses: ramsey/composer-install@57532f8be5bda426838819c5ee9afb8af389d51a # v3.0.0
+        with:
+          dependency-versions: ${{ matrix.dependency-versions }}
+          composer-options: ${{ matrix.composer-options }}
 
-    - name: Pull the docker image used by the tests.
-      run: docker pull busybox:latest
+      - name: Pull the docker image used by the tests.
+        run: docker pull busybox:latest
 
-    - name: Run PHPUnit test suite
-      run: composer run-script test-ci
+      - name: Run PHPUnit test suite
+        run: composer run-script test-ci
 
-    - name: Publish code coverage
-      uses: paambaati/codeclimate-action@a1831d7162ea1fbc612ffe5fb3b90278b7999d59 # v5.0.0
-      env:
-        CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-      with:
-        coverageCommand: composer run-script test-coverage
-        coverageLocations: |
-          ${{github.workspace}}/clover.xml:clover
-      if: github.event_name != 'pull_request'
+      - name: Publish code coverage
+        uses: paambaati/codeclimate-action@a1831d7162ea1fbc612ffe5fb3b90278b7999d59 # v5.0.0
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        with:
+          coverageCommand: composer run-script test-coverage
+          coverageLocations: |
+            ${{github.workspace}}/clover.xml:clover
+        if: github.event_name != 'pull_request'

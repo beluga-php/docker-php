@@ -11,7 +11,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class SystemEvents extends BaseEndpoint
 {
-    protected function transformResponseBody(ResponseInterface $response, SerializerInterface $serializer, string $contentType = null)
+    protected function transformResponseBody(ResponseInterface $response, SerializerInterface $serializer, ?string $contentType = null)
     {
         if (200 === $response->getStatusCode()) {
             return new EventStream($response->getBody(), $serializer);

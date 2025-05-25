@@ -66,7 +66,7 @@ class Docker extends Client
     /**
      * {@inheritdoc}
      */
-    public function imageCreate(string $requestBody = null, array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function imageCreate(?string $requestBody = null, array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new ImageCreate($requestBody, $queryParameters, $headerParameters), $fetch);
     }

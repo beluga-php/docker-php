@@ -24,7 +24,7 @@ class ImageBuild extends BaseEndpoint
         return [['Content-Type' => ['application/octet-stream']], $body];
     }
 
-    protected function transformResponseBody(ResponseInterface $response, SerializerInterface $serializer, string $contentType = null)
+    protected function transformResponseBody(ResponseInterface $response, SerializerInterface $serializer, ?string $contentType = null)
     {
         if (200 === $response->getStatusCode()) {
             return new BuildStream($response->getBody(), $serializer);
