@@ -4,15 +4,14 @@ on:
   push:
     paths-ignore:
       - "doc/**"
-      - ".github/**"
   pull_request:
     paths-ignore:
       - "doc/**"
-      - ".github/**"
+
 
 jobs:
   phpunit:
-    name: PHP ${{ matrix.php-version }} (${{ matrix.dependency-version }})
+    name: PHP ${{ matrix.php-version }} (${{ matrix.dependency-versions }})
 
     runs-on: ubuntu-latest
     continue-on-error: ${{ matrix.experimental }}
@@ -55,6 +54,7 @@ jobs:
         run: composer run-script test-ci
 
       - name: Publish code coverage
+        if: github.repository == 'beluga-php/docker-php' && github.event_name != 'pull_request'
         uses: paambaati/codeclimate-action@a1831d7162ea1fbc612ffe5fb3b90278b7999d59 # v5.0.0
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
@@ -62,4 +62,4 @@ jobs:
           coverageCommand: composer run-script test-coverage
           coverageLocations: |
             ${{github.workspace}}/clover.xml:clover
-        if: github.event_name != 'pull_request'
+
