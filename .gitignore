@@ -3,3 +3,4 @@ bin/
 composer.lock
 .vagrant
 /.php-cs-fixer.cache
+/.phpunit.result.cache

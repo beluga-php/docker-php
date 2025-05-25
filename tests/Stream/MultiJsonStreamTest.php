@@ -41,11 +41,18 @@ class MultiJsonStreamTest extends TestCase
         $serializer = $this->getMockBuilder(SerializerInterface::class)
             ->getMock();
 
+        $callIndex = 0;
         $serializer
             ->expects($this->exactly(\count($jsonParts)))
             ->method('deserialize')
-                ->withConsecutive(...array_map(fn ($part) => [$part, BuildInfo::class, 'json', []], $jsonParts))
-        ;
+            ->willReturnCallback(function ($data, $class, $format, $context) use ($jsonParts, &$callIndex) {
+                $this->assertEquals($jsonParts[$callIndex], $data);
+                $this->assertEquals(BuildInfo::class, $class);
+                $this->assertEquals('json', $format);
+                $this->assertEquals([], $context);
+                $callIndex++;
+                return null;
+            });
 
         $stub = $this->getMockForAbstractClass(MultiJsonStream::class, [$stream, $serializer]);
         $stub->expects($this->any())
