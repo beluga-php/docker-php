@@ -55,7 +55,7 @@ jobs:
 
       - name: Publish code coverage
         if: github.repository == 'beluga-php/docker-php' && github.event_name != 'pull_request'
-        uses: paambaati/codeclimate-action@a1831d7162ea1fbc612ffe5fb3b90278b7999d59 # v5.0.0
+        uses: paambaati/codeclimate-action@f429536ee076d758a24705203199548125a28ca7 # v9.0.0
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
