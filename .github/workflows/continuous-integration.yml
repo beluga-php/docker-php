@@ -8,7 +8,6 @@ on:
     paths-ignore:
       - "doc/**"
 
-
 jobs:
   phpunit:
     name: PHP ${{ matrix.php-version }} (${{ matrix.dependency-versions }})
@@ -52,14 +51,3 @@ jobs:
 
       - name: Run PHPUnit test suite
         run: composer run-script test-ci
-
-      - name: Publish code coverage
-        if: github.repository == 'beluga-php/docker-php' && github.event_name != 'pull_request'
-        uses: paambaati/codeclimate-action@a1831d7162ea1fbc612ffe5fb3b90278b7999d59 # v5.0.0
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-        with:
-          coverageCommand: composer run-script test-coverage
-          coverageLocations: |
-            ${{github.workspace}}/clover.xml:clover
-
