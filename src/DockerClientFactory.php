@@ -28,7 +28,7 @@ final class DockerClientFactory
         $host = preg_match('/unix:\/\//', $config['remote_socket']) ? 'http://localhost' : $config['remote_socket'];
 
         $pluginClientFactory ??= new PluginClientFactory();
-        $dockerClientVersion = getenv('DOCKER_API_VERSION') ?? 'v1.43';
+        $dockerClientVersion = getenv('DOCKER_API_VERSION') ? getenv('DOCKER_API_VERSION') : 'v1.43';
 
         return $pluginClientFactory->createClient(
             $socketClient,
