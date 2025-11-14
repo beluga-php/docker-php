@@ -28,13 +28,14 @@ final class DockerClientFactory
         $host = preg_match('/unix:\/\//', $config['remote_socket']) ? 'http://localhost' : $config['remote_socket'];
 
         $pluginClientFactory ??= new PluginClientFactory();
+        $dockerClientVersion = getenv('DOCKER_API_VERSION') ?? 'v1.43';
 
         return $pluginClientFactory->createClient(
             $socketClient,
             [
                 new ContentLengthPlugin(),
                 new DecoderPlugin(),
-                new AddPathPlugin($uriFactory->createUri('/v1.43')),
+                new AddPathPlugin($uriFactory->createUri('/' . ltrim($dockerClientVersion))),
                 new AddHostPlugin($uriFactory->createUri($host)),
                 new HeaderDefaultsPlugin([
                     'host' => parse_url($host, \PHP_URL_HOST),
