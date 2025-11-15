@@ -27,7 +27,8 @@ class ContainerAttachWebsocket extends BaseEndpoint
         );
     }
 
-    protected function transformResponseBody(ResponseInterface $response, SerializerInterface $serializer, string $contentType = null)
+    protected function transformResponseBody(ResponseInterface $response, SerializerInterface $serializer, ?string
+    $contentType = null)
     {
         if (200 === $response->getStatusCode() && DockerRawStream::HEADER === $contentType) {
             return new AttachWebsocketStream($response->getBody());

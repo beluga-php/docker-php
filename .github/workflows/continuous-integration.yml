@@ -8,7 +8,6 @@ on:
     paths-ignore:
       - "doc/**"
 
-
 jobs:
   phpunit:
     name: PHP ${{ matrix.php-version }} (${{ matrix.dependency-versions }})
@@ -29,10 +28,10 @@ jobs:
 
     steps:
       - name: Repository checkout
-        uses: actions/checkout@1d96c772d19495a3b5c517cd2bc0cb401ea0529f # v4.1.3
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
       - name: Setup PHP with PECL extension
-        uses: shivammathur/setup-php@cf4cade2721270509d5b1c766ab3549210a39a2a # v2.33.0
+        uses: shivammathur/setup-php@bf6b4fbd49ca58e4608c9c89fba0b8d90bd2a39f # v2.35.5
         with:
           php-version: ${{ matrix.php-version }}
           tools: composer:v2
@@ -52,14 +51,3 @@ jobs:
 
       - name: Run PHPUnit test suite
         run: composer run-script test-ci
-
-      - name: Publish code coverage
-        if: github.repository == 'beluga-php/docker-php' && github.event_name != 'pull_request'
-        uses: paambaati/codeclimate-action@a1831d7162ea1fbc612ffe5fb3b90278b7999d59 # v5.0.0
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-        with:
-          coverageCommand: composer run-script test-coverage
-          coverageLocations: |
-            ${{github.workspace}}/clover.xml:clover
-
