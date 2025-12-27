@@ -41,7 +41,7 @@ jobs:
         run: composer validate --strict
 
       - name: Install dependencies
-        uses: ramsey/composer-install@57532f8be5bda426838819c5ee9afb8af389d51a # v3.0.0
+        uses: ramsey/composer-install@3cf229dc2919194e9e36783941438d17239e8520 # v3.1.1
         with:
           dependency-versions: ${{ matrix.dependency-versions }}
           composer-options: ${{ matrix.composer-options }}
