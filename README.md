@@ -1,6 +1,7 @@
 # Docker PHP
 
-Development has moved back to the original project at https://github.com/docker-php/docker-php.
+> [!NOTE]
+> Development has moved back to the original project at https://github.com/docker-php/docker-php.
 
 **Docker PHP** (for lack of a better name) is a [Docker](http://docker.com/) client written in PHP.
 This library aim to reach 100% API support of the Docker Engine.
